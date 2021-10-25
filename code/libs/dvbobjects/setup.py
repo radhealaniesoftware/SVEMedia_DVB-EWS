@@ -31,6 +31,8 @@ setup(
         'dvbobjects.MPEG',
         'dvbobjects.SBTVD',
         'dvbobjects.utils',
+        'dvbobjects.INDEWS',
+        'dvbobjects.DEWS'
         ],
 
     ext_modules = _ext_modules
