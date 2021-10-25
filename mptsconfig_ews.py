@@ -727,9 +727,9 @@ ewsit = emergency_info_section(
 	ewsit_loop = [
 	    emergency_info_loop_item(
 		original_network_id = 1,
-        transport_stream_id = indtv_transport_stream_id,
-        version = 1
-        owner_descriptor = "BMKG DEWS Server",
+        	transport_stream_id = indtv_transport_stream_id,
+        	version = 1,
+        	owner_descriptor = "BMKG DEWS Server",
 	    ),
 	],	
     version_number = 1, # you need to change the table number every time you edit, so the decoder will compare its version with the new one and update the table
