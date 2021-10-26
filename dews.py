@@ -21,7 +21,7 @@ i = 0
 indews_pmt_pid =  1037
 
 for arg in sys.argv: 
-    if i == 0 :
+	if i == 0 :
 		v_original_network_id = arg
 	elif i == 1 :
 		v_disaster_code = arg
