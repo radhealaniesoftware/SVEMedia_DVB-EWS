@@ -62,20 +62,13 @@ class emergency_message_section(Section):
 		self.private_indicator = 1
 
         fmt = "!HHHHB%ds" % (len(pl_bytes))
-        return pack(fmt,
-		    self.original_transport_stream_id,
-			self.disaster_code,
-    	    self.latitude,
-    	    self.longitude,
-    	    len(self.emergency_message_loop),
-            pl_bytes
-            )
+        return pack(fmt,self.original_transport_stream_id,self.disaster_code,self.latitude,self.longitude,len(self.emergency_message_loop),pl_bytes)
             
 
 class emergency_message_loop_item(DVBobject):
 
     """
-	  expects the following variable
+      expects the following variable
       destination_transport_stream_id		- 2byte
       severity_code							- 2byte
       message      							- 80byte
@@ -87,11 +80,4 @@ class emergency_message_loop_item(DVBobject):
 
         # pack program_loop_item
         fmt = "!HHB%ds" % (len(self.ews_message), len(pl_bytes))
-	return pack(fmt,
-	    self.destination_transport_stream_id,
-        self.severity_code,
-	    len(self.ews_message),
-	    self.ews_message,
-	)
-
-
+	return pack(fmt,self.destination_transport_stream_id,self.severity_code,len(self.ews_message),self.ews_message)
