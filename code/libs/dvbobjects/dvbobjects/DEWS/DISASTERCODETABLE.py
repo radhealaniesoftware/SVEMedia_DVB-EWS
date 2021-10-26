@@ -45,7 +45,7 @@ class disaster_code_section(Section):
             "")
 
         self.table_id_extension = 0x03
-		self.private_indicator = 1
+	self.private_indicator = 1
 
         fmt = "!HB%ds" % (len(pl_bytes))
         return pack(fmt,
