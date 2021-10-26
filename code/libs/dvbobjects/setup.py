@@ -25,14 +25,14 @@ setup(
         'dvbobjects.DSMCC',
         'dvbobjects.DSMCC.BIOP',
         'dvbobjects.DVB',
+        'dvbobjects.INDEWS',
+        'dvbobjects.DEWS',
         'dvbobjects.MHP',
         'dvbobjects.HBBTV',
 	'dvbobjects.PSI',
         'dvbobjects.MPEG',
         'dvbobjects.SBTVD',
-        'dvbobjects.utils',
-        'dvbobjects.INDEWS',
-        'dvbobjects.DEWS'
+        'dvbobjects.utils'
         ],
 
     ext_modules = _ext_modules
