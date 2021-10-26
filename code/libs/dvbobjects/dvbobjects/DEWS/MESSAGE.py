@@ -58,8 +58,8 @@ class emergency_message_section(Section):
             map(lambda x: x.pack(),
                 self.emergency_message_loop),
             "")
-		self.table_id_extension = 0x02
-		self.private_indicator = 1
+	self.table_id_extension = 0x02
+	self.private_indicator = 1
 
         fmt = "!HHHHB%ds" % (len(pl_bytes))
         return pack(fmt,self.original_transport_stream_id,self.disaster_code,self.latitude,self.longitude,len(self.emergency_message_loop),pl_bytes)
