@@ -66,7 +66,7 @@ class emergency_info_section(Section):
             "")
 
         self.table_id_extension = 0x01
-		self.private_indicator = 1
+	self.private_indicator = 1
 
         fmt = "!%ds" % (len(pl_bytes))
         return pack(fmt,
