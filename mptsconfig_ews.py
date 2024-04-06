@@ -57,15 +57,20 @@ indtv6_pmt_pid = 1036
 
 
 app1_ait_pid = 3000
+app2_ait_pid = 2456
 
 dsmcc1_pid = 2003
 dsmcc1_associate_tag = 0x0B
 dsmcc1_carrousel_id = 1
 
+dsmcc2_pid = 2004
+dsmcc2_associate_tag = 0x0B
+dsmcc2_carrousel_id = 1
 
 
 aitpidlist = [
 app1_ait_pid,
+app2_ait_pid,
 ]
 
 
@@ -84,7 +89,14 @@ indews_pmt_pid =  1037
 
 
 SITemp = "./Temp/SITemp"
-
+# parameters reported into the AIT to signalize a broadband application.
+appli_name = "SussySonic Official Website" #application name
+appli_root = "https://radhealaniesoftware.github.io/" #URL base of transport_protocol_descriptor
+appli_path = "index.html"  #initial_path_bytes of simple application descriptor. So the application path will be "http://my_application_root_path/myHbbTV-app/index.html"
+organisationId_1 = 10  # this is a demo value, dvb.org should assign an unique value
+applicationId_1 = 1001 # this is a demo value. This number corresponds to a trusted application. 
+organisationId_2 = 11
+applicationId_2 = 1002
 #
 # Network Information Table
 # this is a basic NIT with the minimum desciptors, OpenCaster has a big library ready to use
@@ -211,10 +223,10 @@ pat = program_association_section(
 	        program_number = indtv6_service_id,
     		PID = indtv6_pmt_pid,
     	    ),
-    	    #program_loop_item(
-	    #    program_number = indtv6_service_id,
-    	    #	PID = indtv6_pmt_pid,
-    	    #),
+    	    program_loop_item(
+	       program_number = indtv6_service_id,
+    	    	PID = indtv6_pmt_pid,
+    	    ),
     	    program_loop_item(
 	        program_number = indews_service_id,
     		PID = indews_pmt_pid,
@@ -228,7 +240,6 @@ pat = program_association_section(
     	    section_number = 0,
     	    last_section_number = 0,
         )
-
 #
 # Service Description Table (ETSI EN 300 468 5.2.3) 
 # this is a basic SDT with the minimum desciptors, OpenCaster has a big library ready to use
@@ -608,26 +619,35 @@ pmtlist = [
         last_section_number = 0,
         ),
 
-    #program_map_section(
-#	program_number = indtv6_service_id,
-#	PCR_PID = 0x3d,
-#	program_info_descriptor_loop = [],
-#	stream_loop = [
-#		stream_loop_item(
-#			stream_type = 2, # mpeg2 video stream type
-#			elementary_PID = 0x3d,
-#			element_info_descriptor_loop = []
-#		),
-#		stream_loop_item(
-#			stream_type = 4, # mpeg2 audio stream type
-#			elementary_PID = 0x3c,
-#			element_info_descriptor_loop = []
-#		),
-#	],
-#        version_number = 1, # you need to change the table number every time you edit, so the decoder will compare its version with the new one and update the table
-#        section_number = 0,
-#        last_section_number = 0,
-#        ),
+    program_map_section(
+	program_number = indtv6_service_id,
+	PCR_PID = 0x3d,
+	program_info_descriptor_loop = [],
+	stream_loop = [
+		stream_loop_item(
+			stream_type = 2, # mpeg2 video stream type
+			elementary_PID = 0x3d,
+			element_info_descriptor_loop = []
+		),
+		stream_loop_item(
+			stream_type = 4, # mpeg2 audio stream type
+			elementary_PID = 0x3c,
+			element_info_descriptor_loop = []
+		),
+		stream_loop_item(
+			stream_type = 5, # AIT stream type
+			elementary_PID = app2_ait_pid,
+			element_info_descriptor_loop = [ 
+			    application_signalling_descriptor(
+				application_type = 0x0010, # HbbTV service
+				AIT_version = 1,  # current ait version
+			    ),
+
+	],
+        version_number = 1, # you need to change the table number every time you edit, so the decoder will compare its version with the new one and update the table
+        section_number = 0,
+        last_section_number = 0,
+        ),
     
 ]
 
@@ -677,6 +697,56 @@ aitlist = [
 			),
         	]
         	),
+ait = application_information_section(
+        application_type = 0x0010,
+        common_descriptor_loop = [
+		external_application_authorisation_descriptor(
+			application_identifiers = [[organisationId_1,applicationId_1] , [organisationId_2,applicationId_2]],
+			application_priority =     [  			5			          ,		 		1			      ]
+			# This descriptor informs that 2 applications are available on the program by specifying the applications identifiers (couple of organization_Id and application_Id parameters) and their related priorities (5 for the first and 1 for the second).
+			# Actualy our service contains only one application so this descriptor is not relevent and is just here to show you how to use this descriptor.
+			# This descriptor is not mandatory and you could remove it (i.e. common_descriptor_loop = []).
+			) 
+		],
+        application_loop = [
+		application_loop_item(
+			organisation_id = organisationId_1,  # this is a demo value, dvb.org should assign an unique value
+			application_id = applicationId_1, 
+			
+			application_control_code = 1, 
+						# 2 is PRESENT, the decoder will add this application to the user choice of application
+						# 1 is AUTOSTART, the application will start immedtiatly to load and to execute
+						# 7 is DISABLED, The application shall not be started and attempts to start it shall fail.
+						# 4 is KILL, it will stop execute the application
+			application_descriptors_loop = [
+				transport_protocol_descriptor(
+					protocol_id = 0x0003, # HTTP transport protocol
+					URL_base = appli_root,
+					URL_extensions = [],
+					transport_protocol_label = 3, # HTTP transport protocol
+				),  
+				application_descriptor(
+					application_profile = 0x0000,
+						#0x0000 basic profile
+						#0x0001 download feature
+						#0x0002 PVR feature
+						#0x0004 RTSP feature
+					version_major = 1, # corresponding to version 1.1.1
+					version_minor = 1,
+					version_micro = 1,
+					service_bound_flag = 1, # 1 means the application is expected to die on service change, 0 will wait after the service change to receive all the AITs and check if the same app is signalled or not
+					visibility = 3, # 3 the applications is visible to the user, 1 the application is visible only to other applications
+					application_priority = 1, # 1 is lowset, it is used when more than 1 applications is executing
+					transport_protocol_labels = [3], # If more than one protocol is signalled then each protocol is an alternative delivery mechanism. The ordering indicates 
+													 # the broadcaster's view of which transport connection will provide the best user experience (first is best)
+				),
+				application_name_descriptor(
+					application_name = appli_name,
+					 ISO_639_language_code = "IDN"
+				),
+				simple_application_location_descriptor(initial_path_bytes = appli_path),		
+			]
+		),
    	],
         version_number = 1,
         section_number = 0,
