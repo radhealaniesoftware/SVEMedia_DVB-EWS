@@ -93,7 +93,7 @@ SITemp = "./Temp/SITemp"
 nit = network_information_section(
 	network_id = 1,
         network_descriptor_loop = [
-	    network_descriptor(network_name = "IND-TV",)
+	    network_descriptor(network_name = "SVEMedia",)
 	],
 	transport_stream_loop = [
 	    transport_stream_loop_item(
@@ -248,8 +248,8 @@ sdt = service_description_section(
 		service_descriptor_loop = [
 		    service_descriptor(
 			service_type = 1, # digital television service
-			service_provider_name = "INDTV",
-			service_name = "IND-TV1",
+			service_provider_name = "SVEMedia",
+			service_name = "Testchannel 1",
 		    ),    
 		],
 	    ),	
@@ -263,8 +263,8 @@ sdt = service_description_section(
 		service_descriptor_loop = [
 		    service_descriptor(
 			service_type = 1, # digital television service
-			service_provider_name = "INDTV",
-			service_name = "IND-TV2",
+			service_provider_name = "SVEMedia",
+			service_name = "Test",
 		    ),    
 		],
 	    ),	
@@ -278,8 +278,8 @@ sdt = service_description_section(
 		service_descriptor_loop = [
 		    service_descriptor(
 			service_type = 1, # digital television service
-			service_provider_name = "INDTV",
-			service_name = "IND-TV3",
+			service_provider_name = "SVEMedia",
+			service_name = "Sonicteamlyvies",
 		    ),    
 		],
 	    ),	
@@ -293,8 +293,8 @@ sdt = service_description_section(
 		service_descriptor_loop = [
 		    service_descriptor(
 			service_type = 1, # digital television service
-			service_provider_name = "INDTV",
-			service_name = "IND-TV4",
+			service_provider_name = "SVEMedia",
+			service_name = "Roblox Channel 1",
 		    ),    
 		],
 	    ),	
@@ -308,8 +308,8 @@ sdt = service_description_section(
 		service_descriptor_loop = [
 		    service_descriptor(
 			service_type = 1, # digital television service
-			service_provider_name = "INDTV",
-			service_name = "IND-TV5",
+			service_provider_name = "SVEMedia",
+			service_name = "Roblox Brookhaven",
 		    ),    
 		],
 	    ),	
@@ -323,26 +323,26 @@ sdt = service_description_section(
 		service_descriptor_loop = [
 		    service_descriptor(
 			service_type = 1, # digital television service
-			service_provider_name = "PT. AZMI JAYA SENTOSA",
-			service_name = "Azmi Jaya Sentosa Televisi (Siaran Martabak)",
+			service_provider_name = "SVEMedia",
+			service_name = "SVE Reserved 1",
 		    ),    
 		],
 	    ),	
 
-	#	service_loop_item(
-	#	service_ID = indtv6_service_id,
-	#	EIT_schedule_flag = 0, # 0 no current even information is broadcasted, 1 broadcasted
-	#	EIT_present_following_flag = 0, # 0 no next event information is broadcasted, 1 is broadcasted
-	#	running_status = 4, # 4 service is running, 1 not running, 2 starts in a few seconds, 3 pausing
-	#	free_CA_mode = 0, # 0 means service is not scrambled, 1 means at least a stream is scrambled
-	#	service_descriptor_loop = [
-	#	    service_descriptor(
-	#		service_type = 1, # digital television service
-	#		service_provider_name = "INDTV",
-	#		service_name = "IND-TV6",
-	#	    ),    
-	#	],
-	#    ),	
+		service_loop_item(
+		service_ID = indtv6_service_id,
+		EIT_schedule_flag = 0, # 0 no current even information is broadcasted, 1 broadcasted
+		EIT_present_following_flag = 0, # 0 no next event information is broadcasted, 1 is broadcasted
+		running_status = 4, # 4 service is running, 1 not running, 2 starts in a few seconds, 3 pausing
+		free_CA_mode = 1, # 0 means service is not scrambled, 1 means at least a stream is scrambled
+		service_descriptor_loop = [
+		    service_descriptor(
+			service_type = 1, # digital television service
+			service_provider_name = "SVEMedia",
+			service_name = "Roblox Bloxburg",
+		    ),    
+		],
+		),	
 
 	    service_loop_item(
 		service_ID = indews_service_id,
@@ -353,8 +353,8 @@ sdt = service_description_section(
 		service_descriptor_loop = [
 		    service_descriptor(
 			service_type = 128, # digital television service
-			service_provider_name = "BMKG",
-			service_name = "Disaster Emergency Warning System",
+			service_provider_name = "SVEMedia",
+			service_name = "SVEMedia EWS",
 		    ),    
 		],
 	    ),
@@ -729,7 +729,7 @@ ewsit = emergency_info_section(
 		original_network_id = 1,
         	transport_stream_id = indtv_transport_stream_id,
         	version = 1,
-        	owner_descriptor = "BMKG DEWS Server",
+        	owner_descriptor = "SVE BMKG DEWS Server",
 	    ),
 	],	
     version_number = 1, # you need to change the table number every time you edit, so the decoder will compare its version with the new one and update the table
@@ -751,13 +751,13 @@ ewsmsgtable = [
 	    (
 		destination_transport_stream_id = indtv_transport_stream_id, 
 		severity_code = 0,
-		message = "Potensi tsunami, mohon untuk pindah ketempat yang lebih tinggi.",
+		message = "Potensi tsunami! Sahabat SVESat/SVECable mohon untuk pindah ketempat yang lebih tinggi.",
 	    ),
 	    emergency_message_loop_item
 	    (
 		destination_transport_stream_id = indtv_transport_stream_id_test, 
 		severity_code = 1,
-		message = "Potensi tsunami, mohon untuk pindah ketempat yang lebih tinggi.",
+		message = "Potensi tsunami! Sahabat SVESat/SVECable mohon untuk pindah ketempat yang lebih tinggi.",
 	    ),	
 	],	
 	version_number = 1, # you need to change the table number every time you edit, so the decoder will compare its version with the new one and update the table
