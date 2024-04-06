@@ -1,7 +1,7 @@
 clear
 
-sudo sh /home/tvdigital/Desktop/LinuxSDK/Dta1xx/Dta1xxInit stop
-sudo sh /home/tvdigital/Desktop/LinuxSDK/Dta1xx/Dta1xxInit start
+sudo sh /home/svemediamuxtvdigital/Desktop/LinuxSDK/Dta1xx/Dta1xxInit stop
+sudo sh /home/svemediamuxtvdigital/Desktop/LinuxSDK/Dta1xx/Dta1xxInit start
 
 export SITemp=./Temp/SITemp
 export AVRef=./AVRef
