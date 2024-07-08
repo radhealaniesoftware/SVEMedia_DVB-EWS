@@ -10,4 +10,4 @@ Andrea Venturi (a.venturi@avalpa.com)
 Riza Azmi (r.azmi@kominfo.go.id)
 
 # Modified and adding HbbTV Test Section by:
-sonicwrld. (yt.rltvnewshd@gmail.com)
+sonicwrld. (yt.remedianewstv@gmail.com)
