@@ -764,9 +764,9 @@ ait = application_information_section(
 # it should be replaced at run time with tstdt
 #
 tdt = time_date_section(
-	year = 108, # since 1900
-	month = 6,
-	day = 16,
+	year = 2025, # since 1900
+	month = 2,
+	day = 18,
 	hour = 0x11, # use hex like decimals
 	minute = 0x30,
 	second = 0x21,
