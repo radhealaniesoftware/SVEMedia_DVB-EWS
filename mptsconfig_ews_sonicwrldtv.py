@@ -90,8 +90,8 @@ indews_pmt_pid =  1037
 
 SITemp = "./Temp/SITemp"
 # parameters reported into the AIT to signalize a broadband application.
-appli_name = "SussySonic Official Website" #application name
-appli_root = "https://radhealaniesoftware.github.io/" #URL base of transport_protocol_descriptor
+appli_name = "Sonicwrld TV hbbTV test" #application name
+appli_root = "https://radhealaniesoftware.github.io/sonicwrldtvhbbtvtest/" #URL base of transport_protocol_descriptor
 appli_path = "index.html"  #initial_path_bytes of simple application descriptor. So the application path will be "http://my_application_root_path/myHbbTV-app/index.html"
 organisationId_1 = 10  # this is a demo value, dvb.org should assign an unique value
 applicationId_1 = 1001 # this is a demo value. This number corresponds to a trusted application. 
